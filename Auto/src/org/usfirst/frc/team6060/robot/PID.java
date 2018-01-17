@@ -15,10 +15,14 @@ public class PID {
     //find what time it is now and how long it has been since the loop was last called
      long now = System.currentTimeMillis();
      long timechanged = (now - lastTime);
-     if(timeChange>=sampletime) {
-    
-    //error variables
-    double error = (setpoint - lastErr);
+
+  
+
+     if(timechanged>=sampleTime) {
+
+ 
+    double error = (setpoint - lastInput);
+
     double errSum =+ error;
     double dInput = (Input - lastInput);
     
