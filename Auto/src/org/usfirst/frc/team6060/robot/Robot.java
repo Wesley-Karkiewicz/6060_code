@@ -76,6 +76,7 @@ public class Robot extends SampleRobot {
 		while (isOperatorControl() && isEnabled()) {
 			double Y = -stick.getRawAxis(1);
 			double X = stick.getRawAxis(0);
+			
 			Timer.delay(0.005);
 		}
 	}
