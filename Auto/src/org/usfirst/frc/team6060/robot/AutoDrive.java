@@ -48,9 +48,9 @@ public class AutoDrive extends Robot {
 	//These objects store the Motors SpeedControllers when AutoDrive Is first declared
 	private SpeedControllerGroup LeftSide_motors; 
 	private SpeedControllerGroup RightSide_motors;
-	private AnalogGyro Gyro;
 	private Encoder Left_Encoder;
 	private Encoder Right_Encoder;
+	private ADXRS450_Gyro Gyro;
 	
 	//each PID loop that the sensors will use, they are given values when AutoDrive is first declared
 	//First two are for the motors
@@ -70,11 +70,13 @@ public class AutoDrive extends Robot {
 		tune(tuneing_values);
 	}
 
-	//Tell the autoDrive Class what sensors the robot has
-	public void Initialize( int left_port, int right_port) {
+	//Tell the autoDrive Class what sensors the robot has, takes the seneros objects 
+	//already declared in the main Robot class
+	public void Initialize(Encoder left_Encoder, Encoder right_Encoder, ADXRS450_Gyro gyro) {
 		
-		Left_Encoder = new Encoder(left_port, (1 + left_port));
-		Right_Encoder = new Encoder(right_port, (1 + right_port));
+		Left_Encoder = left_Encoder;
+		Right_Encoder = right_Encoder;
+		Gyro = gyro;
 		
 	}
 	
