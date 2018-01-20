@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.Encoder;
 /*
 * This is class provides methods to allow the robot to drive 
-* a fixed distance in feet foward or backwards or turn to a 
+* a fixed distance in feet forward or backwards or turn to a 
 * set angle. This uses sensors onboard the robot to make sure 
-* everything is done accurently. The PID loops must be tuned,
-* the tuneing values will come from a double array with another 
+* everything is done accurately. The PID loops must be tuned,
+* the tuning values will come from a double array with another 
 * nested array. the set up should be like this 
 *
 * double [][]Tuning values = {
@@ -24,9 +24,9 @@ import edu.wpi.first.wpilibj.Encoder;
 *
 * TurnAngle(double angle) gets its reference from where ever the front of the robot is facing 
 * at the time the command is called. You can input a range between -180 to 180
-* negitve values has the robot turn to the left, Postive values to the right 
+* Negative values has the robot turn to the left, Positive values to the right 
 *
-* In normal opertion, you will only need to create the Autodrive 
+* In normal operation, you will only need to create the Autodrive 
 * object with the necessary parameters, then call AutoDrive.Initialize(port, port)
 * in the robotinit() method. In the autonomous method you will only need to use 
 * AutoDrive.DriveFeet(number of feet) and AutoDrive.TurnAngle(some angle) 
@@ -87,7 +87,7 @@ public class AutoDrive extends Robot {
 		}
 	}
 	//begin reading sensors and start time keeping,
-	//I may remove this since I dont think it will be useful
+	//I may remove this since I don't think it will be useful
 	public void Start() {
 		
 	}
@@ -96,13 +96,13 @@ public class AutoDrive extends Robot {
 	public void restart() {
 		
 	}
-	//Run a while loop for the deration of the command
-	//The robot will drive the definded amount of feet before running another command 
+	//Run a while loop for the duration of the command
+	//The robot will drive the defined amount of feet before running another command 
 	public void DriveFeet(int feet) {
 		//ignore command if they place to big a distance for the robot to travel 
 		if(feet > 50 || feet < -50) return;
 		
-		//This will run a loop untill the command is finished
+		//This will run a loop until the command is finished
 		boolean IsJobDone = false; 
 		while(!IsJobDone) {
 			
@@ -112,8 +112,8 @@ public class AutoDrive extends Robot {
 	//Run a while loop for the deration of the command
 	//The robot will turn to a definded angle between -180 to 180 before running another command 
 	public void TurnAngle(int Angle) {
-		if(angle >180 || angle < -180) return;
-		//This will run the loop untill the command is finished
+		if(Angle >180 || Angle < -180) return;
+		//This will run the loop until the command is finished
 		boolean IsJobDone = false; 
 		while(!IsJobDone) {
 			

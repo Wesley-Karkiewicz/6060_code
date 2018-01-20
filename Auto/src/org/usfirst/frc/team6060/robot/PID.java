@@ -8,35 +8,32 @@ public class PID {
      long lastTime = 0;
     public double Input, Output;
     private double P, I, D;
-<<<<<<< HEAD
-    private double errSum, lastInput;
-    private int sampleTime = 5; //5 ms sample time
-=======
-    private double ITerm, lastInput;
+
+    private double ITerm, lastInput, errSum;
+    private int sampleTime1 = 5; //5 ms sample time
+
     private int sampleTime = 5; //5 ms sample time
     private double outMin, outMax;
->>>>>>> branch 'master' of https://github.com/Wesley-Karkiewicz/6060_code.git
+
  
   public void Caluclate() {
     //find what time it is now and how long it has been since the loop was last called
      long now = System.currentTimeMillis();
      long timechanged = (now - lastTime);
-<<<<<<< HEAD
-     if(timechanged>=sampleTime) {
-=======
+
+     if(timechanged>=sampleTime1) {
+
      
 //update PID loop at the sampleTime interval
-     if(timechanged>=sampleTime) {    
+     if(timechanged>=sampleTime1) {    
     	 double error = (setpoint - lastInput);
     	 ITerm += (I * error);
     	 double dInput = (Input - lastInput);
->>>>>>> branch 'master' of https://github.com/Wesley-Karkiewicz/6060_code.git
-    
-<<<<<<< HEAD
+
     //error variables
-    double error = (setpoint - lastInput);
-    double errSum =+ error;
-    double dInput = (Input - lastInput);
+    error = (setpoint - lastInput);
+     errSum =+ error;
+     dInput = (Input - lastInput);
     
     //compute output
     Output = (P * error) + (I * errSum) + (D * dInput);
@@ -44,15 +41,16 @@ public class PID {
     //Save varibles for next loop
      lastInput = Input;
      lastTime = now;
-=======
+
     	 //compute output
     	 Output = (P * error) + ITerm - (D * dInput);
       
     	 //Save variables for next loop
     	 lastInput = Input;
     	 lastTime = now;
->>>>>>> branch 'master' of https://github.com/Wesley-Karkiewicz/6060_code.git
+
      }
+  }
   }
 
   // Update the tuning_values of a PID loop using the Tuning value table
