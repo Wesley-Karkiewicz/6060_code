@@ -17,9 +17,10 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Encoder; 
+
 
 /**
 
@@ -49,16 +50,18 @@ public class Robot extends SampleRobot {
 	
 	private SpeedControllerGroup Left = new SpeedControllerGroup(Motor0, Motor1);
 	private SpeedControllerGroup Right = new SpeedControllerGroup(Motor2, Motor3);
+
+	private Encoder LeftEncoder = new Encoder(0,1);
+	private Encoder RightEncoder = new Encoder(2,3);
 	
-	private AnalogGyro m_gyro = new AnalogGyro(0);
-	
+	private ADXRS450_Gyro Gyro = new ADXRS450_Gyro();
 	private AutoDrive Auto = new AutoDrive(Left, Right,Tuneing_values);
 
 	public Robot() {
 	}
 	@Override
 	public void robotInit() {
-		Auto.Initialize(0, 0, 2);
+		Auto.Initialize(LeftEncoder,RightEncoder , Gyro);
 	}
 
 	/**

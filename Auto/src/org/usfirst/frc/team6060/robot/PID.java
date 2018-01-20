@@ -6,21 +6,39 @@ public class PID {
     public double setpoint = 0;
     //Internal math 
      long lastTime = 0;
-    private double Input, Output;
+    public double Input, Output;
     private double P, I, D;
-    private double errSum, lastInput;
+
+
     private int sampleTime = 5; //5 ms sample time
+
+
+    private double ITerm, lastInput, errSum;
+
+    
+    private double outMin, outMax;
+
+
  
   public void Caluclate() {
     //find what time it is now and how long it has been since the loop was last called
      long now = System.currentTimeMillis();
      long timechanged = (now - lastTime);
-     if(timechanged>=sampleTime) {
-    
-    //error variables
-    double error = (setpoint - lastInput);
-    double errSum =+ error;
-    double dInput = (Input - lastInput);
+//update PID loop at the sampleTime interval
+     if(timechanged>=sampleTime) {    
+    	 double error = (setpoint - lastInput);
+    	 ITerm += (I * error);
+    	 double dInput = (Input - lastInput);
+
+
+     error = (setpoint - lastInput);
+     errSum =+ error;
+    dInput = (Input - lastInput);
+
+    error = (setpoint - lastInput);
+     errSum =+ error;
+     dInput = (Input - lastInput);
+
     
     //compute output
     Output = (P * error) + (I * errSum) + (D * dInput);
@@ -28,9 +46,18 @@ public class PID {
     //Save varibles for next loop
      lastInput = Input;
      lastTime = now;
+
+
+    	 //compute output
+    	 Output = (P * error) + ITerm - (D * dInput);
+      
+    	 //Save variables for next loop
+    	 lastInput = Input;
+    	 lastTime = now;
+
+
      }
   }
-
   // Update the tuning_values of a PID loop using the Tuning value table
     public void tune(double[][] tuneing_table, int whichPID) {
       
@@ -44,5 +71,17 @@ public class PID {
     public void Set_point(double new_setpoint) {
         setpoint = new_setpoint;
     }
-      
+   //sets the Min and Max values of the PID loops 
+    public void SetOutPutlimits(double Min, double Max) {
+    	if(Min > Max) return;
+    	outMax = Max;
+    	outMin = Min;
+    	
+    	if(Output > outMax) Output = outMax;
+    	else if(Output < outMin) Output = outMin;
+    	
+    	if(ITerm > outMax) ITerm = outMax;
+    	else if(ITerm < outMin) ITerm = outMin;
+    	
+    }    
 }
